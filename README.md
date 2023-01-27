@@ -49,10 +49,38 @@ results = face_detector.detectMultiScale(gray_img, scaleFactor=1.05,minNeighbors
 ```
 
 
+### Object Detection in Real-time
+
+We will be using OpenCV video cam feed input to take images in real-time (video)
+
+```bash
+import cv2
+face_detector = cv2.CascadeClassifier('haarcascade_frontalface_default.xml')
+eye_dectector = cv2.CascadeClassifier('haarcascade_eye.xml')
+# reading the input image now
+cap = cv2.VideoCapture(0)
+while cap.isOpened():
+    _, frame = cap.read()
+    gray = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
+    faces = face_detector.detectMultiScale(gray,1.1, 4 )
+    for (x,y, w, h) in faces:
+    cv2.rectangle(frame, pt1 = (x,y),pt2 = (x+w, y+h), color = (255,0,0),thickness =  3)
+    roi_gray = gray[y:y+h,x:x+w]
+    roi_color = frame[y:y+h, x:x+w]
+    eyes = eye_dectector.detectMultiScale(roi_gray)
+    for (ex,ey, ew, eh) in eyes:
+        cv2.rectangle(roi_color, (ex,ey), (ex+ew, ey+eh), (0,255,0), 5)
+    cv2.imshow("window", frame)
+    if cv2.waitKey(1) & 0xFF == ord('q'):
+        break
+```
+```bash
+frame.release()
+```
 
 
 
 
-### Haar cascade paper :
-[Documentation](https://www.google.com/url?sa=t&rct=j&q=&esrc=s&source=web&cd=&cad=rja&uact=8&ved=2ahUKEwj3kduvhuj8AhVg_7sIHWFnCpsQFnoECA8QAQ&url=https%3A%2F%2Fwww.cs.cmu.edu%2F~efros%2Fcourses%2FLBMV07%2FPapers%2Fviola-cvpr-01.pdf&usg=AOvVaw27yCB2tUSGu6jhcPRte6HS)
+#### Haar cascade paper : [Documentation](https://www.google.com/url?sa=t&rct=j&q=&esrc=s&source=web&cd=&cad=rja&uact=8&ved=2ahUKEwj3kduvhuj8AhVg_7sIHWFnCpsQFnoECA8QAQ&url=https%3A%2F%2Fwww.cs.cmu.edu%2F~efros%2Fcourses%2FLBMV07%2FPapers%2Fviola-cvpr-01.pdf&usg=AOvVaw27yCB2tUSGu6jhcPRte6HS)
 
+#### opencv docsumentations :https://docs.opencv.org/3.4/db/d28/tutorial_cascade_classifier.html
