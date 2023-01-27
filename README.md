@@ -78,7 +78,7 @@ while cap.isOpened():
 frame.release()
 ```
 
-/home/omid/Desktop/result.png
+
 
 
 #### Haar cascade paper : [Documentation](https://www.google.com/url?sa=t&rct=j&q=&esrc=s&source=web&cd=&cad=rja&uact=8&ved=2ahUKEwj3kduvhuj8AhVg_7sIHWFnCpsQFnoECA8QAQ&url=https%3A%2F%2Fwww.cs.cmu.edu%2F~efros%2Fcourses%2FLBMV07%2FPapers%2Fviola-cvpr-01.pdf&usg=AOvVaw27yCB2tUSGu6jhcPRte6HS)
